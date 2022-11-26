@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a7e79993fb343188f9b23dc3b0f0808" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.ACCOUNT" Width="1.5" PointX="1" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.ARTICLE" Width="1.5" PointX="4.875" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.CUSTOMER" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.LOAISP" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.ORDER_DETAILS" Width="1.5" PointX="12.625" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.ORDER" Width="1.5" PointX="8.875" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.PRODUCT" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__ARTICLES__ACCOUN__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__ORDERS__ACCOUNT__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__PRODUCTS__ACCOUN__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__ORDERS__ID_CT__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__PRODUCTS__ID_L__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__ORDER_DET__ID_PR__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__ORDER_DET__NUMBE__4316F928" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.BRAND" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="MEN_FASHIONSModel.INVENTORY" Width="1.5" PointX="6.125" PointY="1.875" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__BRANDS__ID_L__32E0915F" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__INVENTORY__ID_BR__4CA06362" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__PRODUCTS__ID_BR__3F466844" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__INVENTORY__ID_L__4BAC3F29" />
+        <AssociationConnector Association="MEN_FASHIONSModel.FK__INVENTORY__ID_PR__4AB81AF0" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

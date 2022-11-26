@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProjectFinal1.Models.ARTICLE>
+
+@{
+    ViewBag.Title = "ListArticle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int stt = 0;
+}
+
+<h2>ListArticle</h2>
+
+<p>
+    @Html.ActionLink("Add Article", "Index", "AddArticle")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Tên bài viết
+        </th>
+        <th>
+            Ngày viết
+        </th>
+        <th>
+            Người viết
+        </th>
+        <th>
+            Đã duyệt
+        </th>
+        <th>
+            Loại
+        </th>
+       
+
+        <th>#</th>
+    </tr>
+
+@foreach (var item in Model) 
+{
+    stt++;
+    <tr>
+        <td>@stt</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAME_AR)
+        </td>
+        <td>
+            @string.Format("{0:dd-MM-yyyy}",item.DATE_SUB) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACCOUNT1.PASS)
+        </td>
+        <td>
+            <input type="checkbox" @Html.Raw(item.DADUYET==true?"checked":"")/>
+            @Html.DisplayFor(modelItem => item.DADUYET)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.LOAITIN)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_AR }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_AR }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_AR })
+        </td>
+    </tr>
+}
+
+</table>

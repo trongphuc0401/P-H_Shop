@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MEN_FASHIONSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACCOUNT" />
+          </Key>
+          <Property Name="ACCOUNT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NAME_ACCOUNT" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASS" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="SURNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="datetime" />
+          <Property Name="SEX" Type="bit" />
+          <Property Name="P_NUMBER" Type="nvarchar" MaxLength="20" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="HOME_AD" Type="nvarchar" MaxLength="300" />
+          <Property Name="STATUS" Type="bit" />
+          <Property Name="NOTE" Type="ntext" />
+        </EntityType>
+        <EntityType Name="ARTICLES">
+          <Key>
+            <PropertyRef Name="ID_AR" />
+          </Key>
+          <Property Name="ID_AR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME_AR" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="IMG" Type="varchar(max)" />
+          <Property Name="NDTT" Type="nvarchar" MaxLength="1500" />
+          <Property Name="DATE_SUB" Type="datetime" />
+          <Property Name="LOAITIN" Type="nvarchar" MaxLength="30" />
+          <Property Name="ND" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ACCOUNT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DADUYET" Type="bit" />
+        </EntityType>
+        <EntityType Name="BRANDS">
+          <Key>
+            <PropertyRef Name="ID_BR" />
+          </Key>
+          <Property Name="ID_BR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_BR" Type="nvarchar" MaxLength="200" />
+          <Property Name="ID_L" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CT" />
+          </Key>
+          <Property Name="ID_CT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NAME_CT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="datetime" />
+          <Property Name="SEX" Type="bit" />
+          <Property Name="P_NUMBER" Type="nvarchar" MaxLength="20" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="HOME_AD" Type="nvarchar" MaxLength="300" />
+          <Property Name="NOTE" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MEN_FASHIONS.dbo.INVENTORY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INVENTORY">
+          <Key>
+            <PropertyRef Name="ID_PR" />
+            <PropertyRef Name="ID_L" />
+            <PropertyRef Name="ID_BR" />
+          </Key>
+          <Property Name="ID_PR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_L" Type="int" Nullable="false" />
+          <Property Name="ID_BR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMBER_IVT" Type="int" />
+          <Property Name="INVENTORY" Type="int" />
+        </EntityType>
+        <EntityType Name="LOAISP">
+          <Key>
+            <PropertyRef Name="ID_L" />
+          </Key>
+          <Property Name="ID_L" Type="int" Nullable="false" />
+          <Property Name="NAME_L" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NOTE" Type="ntext" />
+        </EntityType>
+        <EntityType Name="ORDER_DETAILS">
+          <Key>
+            <PropertyRef Name="NUMBER_OR" />
+            <PropertyRef Name="ID_PR" />
+          </Key>
+          <Property Name="NUMBER_OR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_PR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AMOUNT" Type="int" />
+          <Property Name="PRICE" Type="bigint" />
+          <Property Name="SALE" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="NUMBER_OR" />
+          </Key>
+          <Property Name="NUMBER_OR" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID_CT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ACCOUNT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DATE_OR" Type="datetime" />
+          <Property Name="ACTIVATED" Type="bit" />
+          <Property Name="DATE_DEL" Type="datetime" />
+          <Property Name="HOME_OR" Type="nvarchar" MaxLength="300" />
+          <Property Name="NOTE" Type="ntext" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="ID_PR" />
+          </Key>
+          <Property Name="ID_PR" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_PR" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IMG" Type="varchar(max)" />
+          <Property Name="NDTT" Type="nvarchar" MaxLength="1500" />
+          <Property Name="DATE_SUB" Type="datetime" />
+          <Property Name="ID_L" Type="int" Nullable="false" />
+          <Property Name="NAME_L" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ND" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ACCOUNT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DVTINH" Type="nvarchar" MaxLength="40" />
+          <Property Name="DADUYET" Type="bit" />
+          <Property Name="PRICE" Type="int" />
+          <Property Name="SALE" Type="int" />
+          <Property Name="ID_BR" Type="varchar" MaxLength="50" />
+          <Property Name="PRODUCER" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__ARTICLES__ACCOUN__2C3393D0">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="ARTICLES" Type="Self.ARTICLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT" />
+            </Principal>
+            <Dependent Role="ARTICLES">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BRANDS__ID_L__32E0915F">
+          <End Role="LOAISP" Type="Self.LOAISP" Multiplicity="1" />
+          <End Role="BRANDS" Type="Self.BRANDS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="BRANDS">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_BR__4CA06362">
+          <End Role="BRANDS" Type="Self.BRANDS" Multiplicity="1" />
+          <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRANDS">
+              <PropertyRef Name="ID_BR" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_BR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_L__4BAC3F29">
+          <End Role="LOAISP" Type="Self.LOAISP" Multiplicity="1" />
+          <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_PR__4AB81AF0">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID_PR" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_PR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_DET__ID_PR__48CFD27E">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID_PR" />
+            </Principal>
+            <Dependent Role="ORDER_DETAILS">
+              <PropertyRef Name="ID_PR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_DET__NUMBE__47DBAE45">
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="1" />
+          <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="NUMBER_OR" />
+            </Principal>
+            <Dependent Role="ORDER_DETAILS">
+              <PropertyRef Name="NUMBER_OR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__ACCOUNT__440B1D61">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__ID_CT__4316F928">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CT" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ID_CT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ACCOUN__398D8EEE">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ID_BR__3F466844">
+          <End Role="BRANDS" Type="Self.BRANDS" Multiplicity="0..1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRANDS">
+              <PropertyRef Name="ID_BR" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ID_BR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ID_L__37A5467C">
+          <End Role="LOAISP" Type="Self.LOAISP" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MEN_FASHIONSModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARTICLES" EntityType="Self.ARTICLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BRANDS" EntityType="Self.BRANDS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAISP" EntityType="Self.LOAISP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTORY" EntityType="Self.INVENTORY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INVENTORY].[ID_PR] AS [ID_PR], 
+    [INVENTORY].[ID_L] AS [ID_L], 
+    [INVENTORY].[ID_BR] AS [ID_BR], 
+    [INVENTORY].[NUMBER_IVT] AS [NUMBER_IVT], 
+    [INVENTORY].[INVENTORY] AS [INVENTORY]
+    FROM [dbo].[INVENTORY] AS [INVENTORY]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__ARTICLES__ACCOUN__2C3393D0" Association="Self.FK__ARTICLES__ACCOUN__2C3393D0">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="ARTICLES" EntitySet="ARTICLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BRANDS__ID_L__32E0915F" Association="Self.FK__BRANDS__ID_L__32E0915F">
+            <End Role="LOAISP" EntitySet="LOAISP" />
+            <End Role="BRANDS" EntitySet="BRANDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_BR__4CA06362" Association="Self.FK__INVENTORY__ID_BR__4CA06362">
+            <End Role="BRANDS" EntitySet="BRANDS" />
+            <End Role="INVENTORY" EntitySet="INVENTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_L__4BAC3F29" Association="Self.FK__INVENTORY__ID_L__4BAC3F29">
+            <End Role="LOAISP" EntitySet="LOAISP" />
+            <End Role="INVENTORY" EntitySet="INVENTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_PR__4AB81AF0" Association="Self.FK__INVENTORY__ID_PR__4AB81AF0">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="INVENTORY" EntitySet="INVENTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__ID_PR__48CFD27E" Association="Self.FK__ORDER_DET__ID_PR__48CFD27E">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__NUMBE__47DBAE45" Association="Self.FK__ORDER_DET__NUMBE__47DBAE45">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__ACCOUNT__440B1D61" Association="Self.FK__ORDERS__ACCOUNT__440B1D61">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__ID_CT__4316F928" Association="Self.FK__ORDERS__ID_CT__4316F928">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ACCOUN__398D8EEE" Association="Self.FK__PRODUCTS__ACCOUN__398D8EEE">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ID_BR__3F466844" Association="Self.FK__PRODUCTS__ID_BR__3F466844">
+            <End Role="BRANDS" EntitySet="BRANDS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ID_L__37A5467C" Association="Self.FK__PRODUCTS__ID_L__37A5467C">
+            <End Role="LOAISP" EntitySet="LOAISP" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MEN_FASHIONSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACCOUNT1" />
+          </Key>
+          <Property Name="ACCOUNT1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="DateTime" Precision="3" />
+          <Property Name="SEX" Type="Boolean" />
+          <Property Name="P_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HOME_AD" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="Boolean" />
+          <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ARTICLES" Relationship="Self.FK__ARTICLES__ACCOUN__2C3393D0" FromRole="ACCOUNT" ToRole="ARTICLES" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK__ORDERS__ACCOUNT__3F466844" FromRole="ACCOUNT" ToRole="ORDERS" />
+          <NavigationProperty Name="PRODUCTS" Relationship="Self.FK__PRODUCTS__ACCOUN__35BCFE0A" FromRole="ACCOUNT" ToRole="PRODUCTS" />
+          <Property Name="NAME_ACCOUNT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ARTICLE">
+          <Key>
+            <PropertyRef Name="ID_AR" />
+          </Key>
+          <Property Name="ID_AR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_AR" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NDTT" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_SUB" Type="DateTime" Precision="3" />
+          <Property Name="LOAITIN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ND" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DADUYET" Type="Boolean" />
+          <NavigationProperty Name="ACCOUNT1" Relationship="Self.FK__ARTICLES__ACCOUN__2C3393D0" FromRole="ARTICLES" ToRole="ACCOUNT" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CT" />
+          </Key>
+          <Property Name="ID_CT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_CT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BIRTHDAY" Type="DateTime" Precision="3" />
+          <Property Name="SEX" Type="Boolean" />
+          <Property Name="P_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HOME_AD" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK__ORDERS__ID_CT__3E52440B" FromRole="CUSTOMER" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="LOAISP">
+          <Key>
+            <PropertyRef Name="ID_L" />
+          </Key>
+          <Property Name="ID_L" Type="Int32" Nullable="false" />
+          <Property Name="NAME_L" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCTS" Relationship="Self.FK__PRODUCTS__ID_L__33D4B598" FromRole="LOAISP" ToRole="PRODUCTS" />
+          <NavigationProperty Name="BRANDS" Relationship="MEN_FASHIONSModel.FK__BRANDS__ID_L__32E0915F" FromRole="LOAISP" ToRole="BRAND" />
+          <NavigationProperty Name="INVENTORies" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_L__4BAC3F29" FromRole="LOAISP" ToRole="INVENTORY" />
+        </EntityType>
+        <EntityType Name="ORDER_DETAILS">
+          <Key>
+            <PropertyRef Name="NUMBER_OR" />
+            <PropertyRef Name="ID_PR" />
+          </Key>
+          <Property Name="NUMBER_OR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_PR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AMOUNT" Type="Int32" />
+          <Property Name="PRICE" Type="Int64" />
+          <Property Name="SALE" Type="Int64" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK__ORDER_DET__ID_PR__440B1D61" FromRole="ORDER_DETAILS" ToRole="PRODUCTS" />
+          <NavigationProperty Name="ORDER" Relationship="Self.FK__ORDER_DET__NUMBE__4316F928" FromRole="ORDER_DETAILS" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="NUMBER_OR" />
+          </Key>
+          <Property Name="NUMBER_OR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACCOUNT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_OR" Type="DateTime" Precision="3" />
+          <Property Name="ACTIVATED" Type="Boolean" />
+          <Property Name="DATE_DEL" Type="DateTime" Precision="3" />
+          <Property Name="HOME_OR" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACCOUNT1" Relationship="Self.FK__ORDERS__ACCOUNT__3F466844" FromRole="ORDERS" ToRole="ACCOUNT" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__ORDERS__ID_CT__3E52440B" FromRole="ORDERS" ToRole="CUSTOMER" />
+          <NavigationProperty Name="ORDER_DETAILS" Relationship="Self.FK__ORDER_DET__NUMBE__4316F928" FromRole="ORDERS" ToRole="ORDER_DETAILS" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ID_PR" />
+          </Key>
+          <Property Name="ID_PR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_PR" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NDTT" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="DATE_SUB" Type="DateTime" Precision="3" />
+          <Property Name="ID_L" Type="Int32" Nullable="false" />
+          <Property Name="ND" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DVTINH" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DADUYET" Type="Boolean" />
+          <Property Name="PRICE" Type="Int32" />
+          <Property Name="SALE" Type="Int32" />
+          <Property Name="PRODUCER" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ACCOUNT1" Relationship="Self.FK__PRODUCTS__ACCOUN__35BCFE0A" FromRole="PRODUCTS" ToRole="ACCOUNT" />
+          <NavigationProperty Name="LOAISP" Relationship="Self.FK__PRODUCTS__ID_L__33D4B598" FromRole="PRODUCTS" ToRole="LOAISP" />
+          <NavigationProperty Name="ORDER_DETAILS" Relationship="Self.FK__ORDER_DET__ID_PR__440B1D61" FromRole="PRODUCTS" ToRole="ORDER_DETAILS" />
+          <Property Name="NAME_L" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_BR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BRAND" Relationship="MEN_FASHIONSModel.FK__PRODUCTS__ID_BR__3F466844" FromRole="PRODUCT" ToRole="BRAND" />
+          <NavigationProperty Name="INVENTORies" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_PR__4AB81AF0" FromRole="PRODUCT" ToRole="INVENTORY" />
+        </EntityType>
+        <Association Name="FK__ARTICLES__ACCOUN__2C3393D0">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="ARTICLES" Type="Self.ARTICLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT1" />
+            </Principal>
+            <Dependent Role="ARTICLES">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__ACCOUNT__3F466844">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT1" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ACCOUN__35BCFE0A">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="ACCOUNT1" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__ID_CT__3E52440B">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CT" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="ID_CT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ID_L__33D4B598">
+          <End Role="LOAISP" Type="Self.LOAISP" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_DET__ID_PR__440B1D61">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID_PR" />
+            </Principal>
+            <Dependent Role="ORDER_DETAILS">
+              <PropertyRef Name="ID_PR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_DET__NUMBE__4316F928">
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="1" />
+          <End Role="ORDER_DETAILS" Type="Self.ORDER_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="NUMBER_OR" />
+            </Principal>
+            <Dependent Role="ORDER_DETAILS">
+              <PropertyRef Name="NUMBER_OR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MEN_FASHIONSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
+          <EntitySet Name="ARTICLES" EntityType="Self.ARTICLE" />
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="LOAISPs" EntityType="Self.LOAISP" />
+          <EntitySet Name="ORDER_DETAILS" EntityType="Self.ORDER_DETAILS" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <AssociationSet Name="FK__ARTICLES__ACCOUN__2C3393D0" Association="Self.FK__ARTICLES__ACCOUN__2C3393D0">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="ARTICLES" EntitySet="ARTICLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__ACCOUNT__3F466844" Association="Self.FK__ORDERS__ACCOUNT__3F466844">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ACCOUN__35BCFE0A" Association="Self.FK__PRODUCTS__ACCOUN__35BCFE0A">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__ID_CT__3E52440B" Association="Self.FK__ORDERS__ID_CT__3E52440B">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ID_L__33D4B598" Association="Self.FK__PRODUCTS__ID_L__33D4B598">
+            <End Role="LOAISP" EntitySet="LOAISPs" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__ID_PR__440B1D61" Association="Self.FK__ORDER_DET__ID_PR__440B1D61">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__NUMBE__4316F928" Association="Self.FK__ORDER_DET__NUMBE__4316F928">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDER_DETAILS" EntitySet="ORDER_DETAILS" />
+          </AssociationSet>
+          <EntitySet Name="BRANDS" EntityType="MEN_FASHIONSModel.BRAND" />
+          <EntitySet Name="INVENTORies" EntityType="MEN_FASHIONSModel.INVENTORY" />
+          <AssociationSet Name="FK__BRANDS__ID_L__32E0915F" Association="MEN_FASHIONSModel.FK__BRANDS__ID_L__32E0915F">
+            <End Role="LOAISP" EntitySet="LOAISPs" />
+            <End Role="BRAND" EntitySet="BRANDS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_BR__4CA06362" Association="MEN_FASHIONSModel.FK__INVENTORY__ID_BR__4CA06362">
+            <End Role="BRAND" EntitySet="BRANDS" />
+            <End Role="INVENTORY" EntitySet="INVENTORies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__ID_BR__3F466844" Association="MEN_FASHIONSModel.FK__PRODUCTS__ID_BR__3F466844">
+            <End Role="BRAND" EntitySet="BRANDS" />
+            <End Role="PRODUCT" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_L__4BAC3F29" Association="MEN_FASHIONSModel.FK__INVENTORY__ID_L__4BAC3F29">
+            <End Role="LOAISP" EntitySet="LOAISPs" />
+            <End Role="INVENTORY" EntitySet="INVENTORies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__ID_PR__4AB81AF0" Association="MEN_FASHIONSModel.FK__INVENTORY__ID_PR__4AB81AF0">
+            <End Role="PRODUCT" EntitySet="PRODUCTS" />
+            <End Role="INVENTORY" EntitySet="INVENTORies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BRAND">
+          <Key>
+            <PropertyRef Name="ID_BR" />
+          </Key>
+          <Property Name="ID_BR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NAME_BR" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ID_L" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LOAISP" Relationship="MEN_FASHIONSModel.FK__BRANDS__ID_L__32E0915F" FromRole="BRAND" ToRole="LOAISP" />
+          <NavigationProperty Name="INVENTORies" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_BR__4CA06362" FromRole="BRAND" ToRole="INVENTORY" />
+          <NavigationProperty Name="PRODUCTS" Relationship="MEN_FASHIONSModel.FK__PRODUCTS__ID_BR__3F466844" FromRole="BRAND" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="INVENTORY">
+          <Key>
+            <PropertyRef Name="ID_PR" />
+            <PropertyRef Name="ID_L" />
+            <PropertyRef Name="ID_BR" />
+          </Key>
+          <Property Name="ID_PR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_L" Type="Int32" Nullable="false" />
+          <Property Name="ID_BR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMBER_IVT" Type="Int32" />
+          <Property Name="INVENTORY1" Type="Int32" />
+          <NavigationProperty Name="BRAND" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_BR__4CA06362" FromRole="INVENTORY" ToRole="BRAND" />
+          <NavigationProperty Name="LOAISP" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_L__4BAC3F29" FromRole="INVENTORY" ToRole="LOAISP" />
+          <NavigationProperty Name="PRODUCT" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_PR__4AB81AF0" FromRole="INVENTORY" ToRole="PRODUCT" />
+        </EntityType>
+        <Association Name="FK__BRANDS__ID_L__32E0915F">
+          <End Type="MEN_FASHIONSModel.LOAISP" Role="LOAISP" Multiplicity="1" />
+          <End Type="MEN_FASHIONSModel.BRAND" Role="BRAND" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="BRAND">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_BR__4CA06362">
+          <End Type="MEN_FASHIONSModel.BRAND" Role="BRAND" Multiplicity="1" />
+          <End Type="MEN_FASHIONSModel.INVENTORY" Role="INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAND">
+              <PropertyRef Name="ID_BR" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_BR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__ID_BR__3F466844">
+          <End Type="MEN_FASHIONSModel.BRAND" Role="BRAND" Multiplicity="0..1" />
+          <End Type="MEN_FASHIONSModel.PRODUCT" Role="PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAND">
+              <PropertyRef Name="ID_BR" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="ID_BR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_L__4BAC3F29">
+          <End Type="MEN_FASHIONSModel.LOAISP" Role="LOAISP" Multiplicity="1" />
+          <End Type="MEN_FASHIONSModel.INVENTORY" Role="INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAISP">
+              <PropertyRef Name="ID_L" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_L" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__ID_PR__4AB81AF0">
+          <End Type="MEN_FASHIONSModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="MEN_FASHIONSModel.INVENTORY" Role="INVENTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="ID_PR" />
+            </Principal>
+            <Dependent Role="INVENTORY">
+              <PropertyRef Name="ID_PR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MEN_FASHIONSModelStoreContainer" CdmEntityContainer="MEN_FASHIONSEntities">
+          <EntitySetMapping Name="ACCOUNTs">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.ACCOUNT">
+              <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="NAME_ACCOUNT" ColumnName="NAME_ACCOUNT" />
+                <ScalarProperty Name="ACCOUNT1" ColumnName="ACCOUNT" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="P_NUMBER" ColumnName="P_NUMBER" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="HOME_AD" ColumnName="HOME_AD" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTICLES">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.ARTICLE">
+              <MappingFragment StoreEntitySet="ARTICLES">
+                <ScalarProperty Name="ID_AR" ColumnName="ID_AR" />
+                <ScalarProperty Name="NAME_AR" ColumnName="NAME_AR" />
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+                <ScalarProperty Name="NDTT" ColumnName="NDTT" />
+                <ScalarProperty Name="DATE_SUB" ColumnName="DATE_SUB" />
+                <ScalarProperty Name="LOAITIN" ColumnName="LOAITIN" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
+                <ScalarProperty Name="DADUYET" ColumnName="DADUYET" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="ID_CT" ColumnName="ID_CT" />
+                <ScalarProperty Name="NAME_CT" ColumnName="NAME_CT" />
+                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="P_NUMBER" ColumnName="P_NUMBER" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="HOME_AD" ColumnName="HOME_AD" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAISPs">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.LOAISP">
+              <MappingFragment StoreEntitySet="LOAISP">
+                <ScalarProperty Name="ID_L" ColumnName="ID_L" />
+                <ScalarProperty Name="NAME_L" ColumnName="NAME_L" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_DETAILS">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.ORDER_DETAILS">
+              <MappingFragment StoreEntitySet="ORDER_DETAILS">
+                <ScalarProperty Name="NUMBER_OR" ColumnName="NUMBER_OR" />
+                <ScalarProperty Name="ID_PR" ColumnName="ID_PR" />
+                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="SALE" ColumnName="SALE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="NUMBER_OR" ColumnName="NUMBER_OR" />
+                <ScalarProperty Name="ID_CT" ColumnName="ID_CT" />
+                <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
+                <ScalarProperty Name="DATE_OR" ColumnName="DATE_OR" />
+                <ScalarProperty Name="ACTIVATED" ColumnName="ACTIVATED" />
+                <ScalarProperty Name="DATE_DEL" ColumnName="DATE_DEL" />
+                <ScalarProperty Name="HOME_OR" ColumnName="HOME_OR" />
+                <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="ID_BR" ColumnName="ID_BR" />
+                <ScalarProperty Name="NAME_L" ColumnName="NAME_L" />
+                <ScalarProperty Name="ID_PR" ColumnName="ID_PR" />
+                <ScalarProperty Name="NAME_PR" ColumnName="NAME_PR" />
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
+                <ScalarProperty Name="NDTT" ColumnName="NDTT" />
+                <ScalarProperty Name="DATE_SUB" ColumnName="DATE_SUB" />
+                <ScalarProperty Name="ID_L" ColumnName="ID_L" />
+                <ScalarProperty Name="ND" ColumnName="ND" />
+                <ScalarProperty Name="ACCOUNT" ColumnName="ACCOUNT" />
+                <ScalarProperty Name="DVTINH" ColumnName="DVTINH" />
+                <ScalarProperty Name="DADUYET" ColumnName="DADUYET" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="SALE" ColumnName="SALE" />
+                <ScalarProperty Name="PRODUCER" ColumnName="PRODUCER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BRANDS">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.BRAND">
+              <MappingFragment StoreEntitySet="BRANDS">
+                <ScalarProperty Name="ID_L" ColumnName="ID_L" />
+                <ScalarProperty Name="NAME_BR" ColumnName="NAME_BR" />
+                <ScalarProperty Name="ID_BR" ColumnName="ID_BR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTORies">
+            <EntityTypeMapping TypeName="MEN_FASHIONSModel.INVENTORY">
+              <MappingFragment StoreEntitySet="INVENTORY">
+                <ScalarProperty Name="INVENTORY1" ColumnName="INVENTORY" />
+                <ScalarProperty Name="NUMBER_IVT" ColumnName="NUMBER_IVT" />
+                <ScalarProperty Name="ID_BR" ColumnName="ID_BR" />
+                <ScalarProperty Name="ID_L" ColumnName="ID_L" />
+                <ScalarProperty Name="ID_PR" ColumnName="ID_PR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
