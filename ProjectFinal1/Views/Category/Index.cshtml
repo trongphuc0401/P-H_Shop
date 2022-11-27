@@ -34,7 +34,11 @@
                                 <ul>
                                     @foreach (LOAISP x in Global.GetLOAISPs())
                                     {
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">@x.NAME_L</label></li>
+                                        <li class="filter-list">
+
+                                            <input class="pixel-radio" type="radio" id="@x.ID_L" name="brand">
+                                             <label for="men">@x.NAME_L</label>
+                                        </li>
 
                                     }
                                 </ul>
@@ -50,7 +54,11 @@
                             <ul>
                                 @foreach (BRAND x in Global.GetBRANDs())
                                 {
-                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">@x.NAME_BR<span></span></label></li>
+                                    <li class="filter-list">
+                                
+                                        <input class="pixel-radio" type="radio" id="apple" name="brand">
+                                            <label for="apple">@x.NAME_BR<span></span></label>
+                                    </li>
 
                                 }
 
@@ -123,38 +131,43 @@
                 </div>
                 <!-- End Filter Bar -->
                 <!-- Start Best Seller -->
-                <section class="lattest-product-area pb-40 category-list">
-                    <div class="row">
+                @{
+                    foreach (LOAISP y in Global.GetLOAISPs().Take(1))
+                    {
+                        <section class="lattest-product-area pb-40 category-list">
+                            <div class="row">
 
-                        @{
-                                int n = 0;
-                                foreach (PRODUCT x in Global.GetPRODUCTs())
-                                {
-                                <div class="col-md-6 col-lg-4">
-                                    <div class="card text-center card-product">
-                                        <div class="card-product__img">
-                                            <img class="card-img" src="@x.IMG" alt="">
-                                            <ul class="card-product__imgOverlay">
-                                                <li><button><i class="ti-search"></i></button></li>
-                                                <li><button><i class="ti-shopping-cart"></i></button></li>
-                                                <li><button><i class="ti-heart"></i></button></li>
-                                            </ul>
+                                @{
+                                    int n = 0;
+                                    foreach (PRODUCT x in Global.GetPRODUCTByLOAISP(y.ID_L))
+                                    {
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card text-center card-product">
+                                                <div class="card-product__img">
+                                                    <img class="card-img" src="@x.IMG" alt="">
+                                                    <ul class="card-product__imgOverlay">
+                                                        <li><button><i class="ti-search"></i></button></li>
+                                                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                                                        <li><button><i class="ti-heart"></i></button></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <h4 class="card-product__title"><a href="#">@x.NAME_PR</a></h4>
+                                                    <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            
-                                            <h4 class="card-product__title"><a href="#">@x.NAME_PR</a></h4>
-                                            <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                if (n++>=14)
-                                {
-                                    break;
+                                        if (n++ >= 14)
+                                        {
+                                            break;
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                    </div>
-                </section>
+                            </div>
+                        </section>
+                    }
+                }
                 <!-- End Best Seller -->
             </div>
         </div>

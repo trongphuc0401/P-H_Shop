@@ -28,14 +28,36 @@ namespace ProjectFinal1.Models
         {
             return new DbContext("name=MEN_FASHIONSEntities").Set<LOAISP>().ToList();
         }
-        
+        /// <summary>
+        /// function to get articles
+        /// </summary>
+        /// <returns></returns>
         public static List<ARTICLE> GetARTICLEs() 
         {
             return new DbContext("name=MEN_FASHIONSEntities").Set<ARTICLE>().ToList();
         }
+        /// <summary>
+        /// function to get brand
+        /// </summary>
+        /// <returns></returns>
         public static List<BRAND> GetBRANDs()
         {
             return new DbContext("name=MEN_FASHIONSEntities").Set<BRAND>().ToList();
+        }
+        /// <summary>
+        /// function to get product by loaisp
+        /// </summary>
+        /// <param name="ID_L"></param>
+        /// <returns></returns>
+        public static List<PRODUCT> GetPRODUCTByLOAISP(int ID_L)
+        {
+            List<PRODUCT> pr = new List<PRODUCT>();
+            DbContext db = new DbContext("name=MEN_FASHIONSEntities");
+            // get data
+            pr = db.Set<PRODUCT>().Where(x=>x.ID_L==ID_L).ToList<PRODUCT>();
+
+            return pr;
+
         }
     }
 }
