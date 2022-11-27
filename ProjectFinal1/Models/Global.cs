@@ -37,5 +37,13 @@ namespace ProjectFinal1.Models
         {
             return new DbContext("name=MEN_FASHIONSEntities").Set<BRAND>().ToList();
         }
+        public static List<PRODUCT> GetPRODUCTByLOAISP(int ID_L)
+        {
+            List<PRODUCT> pr = new List<PRODUCT>();
+            DbContext db = new DbContext("name=MEN_FASHIONSEntities");
+            // get data
+            pr = db.Set<PRODUCT>().Where(x=>x.ID_L==ID_L).ToList<PRODUCT>();
+            return pr;
+        }
     }
 }

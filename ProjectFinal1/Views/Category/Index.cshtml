@@ -1,6 +1,6 @@
 ﻿@using ProjectFinal1.Models;
 @{
-    ViewBag.Title="Category";
+    ViewBag.Title = "Category";
     ViewBag.active = 2;
 
 }
@@ -32,10 +32,18 @@
                         <li class="common-filter">
                             <form action="#">
                                 <ul>
-                                    @foreach (LOAISP x in Global.GetLOAISPs())
-                                    {
-                                        <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men">@x.NAME_L</label></li>
+                                    @{
+                                        int a = 0;
+                                        foreach (LOAISP x in Global.GetLOAISPs())
+                                        {
+                                            <li class="filter-list">
+                                                <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_L" )>
+                                                    <input class="pixel-radio" type="radio" id="@x.ID_L" name="@x.ID_L">
+                                                    <label for="@x.ID_L">@x.NAME_L</label>
+                                                </a>
+                                            </li>
 
+                                        }
                                     }
                                 </ul>
                             </form>
@@ -45,14 +53,25 @@
                 <div class="sidebar-filter">
                     <div class="top-filter-head">Product Filters</div>
                     <div class="common-filter">
-                        <div class="head">Brands</div>
+
                         <form action="#">
                             <ul>
-                                @foreach (BRAND x in Global.GetBRANDs())
-                                {
-                                    <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">@x.NAME_BR<span></span></label></li>
 
-                                }
+
+                                        @{
+                                            int i = 0;
+                                            foreach (BRAND x in Global.GetBRANDs())
+                                            {
+                                                <li class="filter-list">
+                                                    <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_L" )>
+                                                        <input class="pixel-radio" type="radio" id="@x.ID_BR" name="@x.ID_BR">
+                                                        <label for="@x.NAME_BR">@x.NAME_BR<span></span></label>
+                                                    </a>
+                                                </li>
+
+                                            }
+                                        }
+
 
                             </ul>
                         </form>
@@ -100,9 +119,12 @@
                 <div class="filter-bar d-flex flex-wrap align-items-center">
                     <div class="sorting">
                         <select>
-                            <option value="1">Default sorting</option>
-                            <option value="1">Default sorting</option>
-                            <option value="1">Default sorting</option>
+                            @foreach (BRAND x in Global.GetBRANDs())
+                            {
+                                <option value="@x.ID_L">@x.NAME_BR</option>
+
+                            }
+
                         </select>
                     </div>
                     <div class="sorting mr-auto">
@@ -123,38 +145,45 @@
                 </div>
                 <!-- End Filter Bar -->
                 <!-- Start Best Seller -->
-                <section class="lattest-product-area pb-40 category-list">
-                    <div class="row">
 
-                        @{
-                                int n = 0;
-                                foreach (PRODUCT x in Global.GetPRODUCTs())
-                                {
-                                <div class="col-md-6 col-lg-4">
-                                    <div class="card text-center card-product">
-                                        <div class="card-product__img">
-                                            <img class="card-img" src="@x.IMG" alt="">
-                                            <ul class="card-product__imgOverlay">
-                                                <li><button><i class="ti-search"></i></button></li>
-                                                <li><button><i class="ti-shopping-cart"></i></button></li>
-                                                <li><button><i class="ti-heart"></i></button></li>
-                                            </ul>
+                @{
+                    int m = 0;
+                    foreach (LOAISP y in Global.GetLOAISPs().Take(1))
+                    {
+                        <section class="lattest-product-area pb-40 category-list @(m++==0?"active":"")" id="@y.ID_L">
+                            <div class="row">
+
+                                @{
+                                    int n = 0;
+                                    foreach (PRODUCT x in Global.GetPRODUCTByLOAISP(y.ID_L))
+                                    {
+                                        <div class="col-md-6 col-lg-4">
+                                            <div class="card text-center card-product">
+                                                <div class="card-product__img">
+                                                    <img class="card-img" src="@x.IMG" alt="">
+                                                    <ul class="card-product__imgOverlay">
+                                                        <li><button><i class="ti-search"></i></button></li>
+                                                        <li><button><i class="ti-shopping-cart"></i></button></li>
+                                                        <li><button><i class="ti-heart"></i></button></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <h4 class="card-product__title"><a href="#">@x.NAME_PR</a></h4>
+                                                    <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            
-                                            <h4 class="card-product__title"><a href="#">@x.NAME_PR</a></h4>
-                                            <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                if (n++>=14)
-                                {
-                                    break;
-                                }
+                                        if (n++ >= 14)
+                                        {
+                                            break;
+                                        }
+                                    }
                             }
-                        }
-                    </div>
-                </section>
+                            </div>
+                        </section>
+                    }
+                }
                 <!-- End Best Seller -->
             </div>
         </div>
@@ -172,14 +201,14 @@
 
 
         @{
-           
+
             foreach (PRODUCT x in Global.GetPRODUCTs().Take(4))
             {
                 <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
                     <div class="single-search-product-wrapper">
 
                         @{
-                         
+
                             foreach (PRODUCT y in Global.GetPRODUCTs().Take(2))
                             {
                                 <div class="single-search-product d-flex">
@@ -189,12 +218,12 @@
                                         <div class="price">@string.Format("{0:#,0}", @x.PRICE) VND</div>
                                     </div>
                                 </div>
-                              
+
                             }
                         }
                     </div>
                 </div>
-              
+
             }
 
         }
