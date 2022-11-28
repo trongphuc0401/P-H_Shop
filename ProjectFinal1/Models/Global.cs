@@ -59,5 +59,15 @@ namespace ProjectFinal1.Models
             return pr;
 
         }
+        public static List<PRODUCT> GetPRODUCTBysinglePR(string ID_PR)
+        {
+            List<PRODUCT> pr = new List<PRODUCT>();
+            DbContext db = new DbContext("name=MEN_FASHIONSEntities");
+            // get data
+            pr = db.Set<PRODUCT>().Where(x=>x.ID_PR==ID_PR).ToList<PRODUCT>();
+
+            return pr;
+
+        }
     }
 }
