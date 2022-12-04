@@ -1,7 +1,7 @@
 ﻿@model ProjectFinal1.Models.ARTICLE
 
 @{
-    ViewBag.Title = "AddArticle";
+    ViewBag.Title = "Editrticle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,11 +9,14 @@
 
 {
     @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m=>m.ID_AR)
+
     <div class="row m-2">
         <div class="col-md-12">
             <div class="content">
                 <div class="section-block" id="basicform">
-                    <h3 class="section-title">New Post</h3>
+                    <h3 class="section-title">Update Post</h3>
                 </div>
                 <div class="card">
                     <div class="row">
@@ -38,7 +41,7 @@
                                 <div class="form-group m-2">
                                     @Html.LabelFor(model => model.ND, "Content", htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-12">
-                                        <textarea rows="2" cols="3" class="form-control" name="ND" id="inputND"></textarea>
+                                        <textarea class="form-control" name="ND" id="inputND">@Model.ND</textarea>
                                         @Html.ValidationMessageFor(model => model.ND, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -48,7 +51,7 @@
                                 <div class="form-group col-md-4">
                                     @Html.LabelFor(model => model.DATE_SUB, "Date", htmlAttributes: new { @class = "col-form-label" })
                                     <div class="col-md-14">
-                                        @Html.EditorFor(model => model.DATE_SUB, new { htmlAttributes = new { @class = "form-control", type = "Date" } })
+                                        @Html.EditorFor(model => model.DATE_SUB, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                                         @Html.ValidationMessageFor(model => model.DATE_SUB, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -64,7 +67,6 @@
                                         @Html.ValidationMessageFor(model => model.ACCOUNT, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                               
                                 <div class="form-group col-md-4">
                                     @Html.LabelFor(model => model.DADUYET, "Approved", htmlAttributes: new { @class = "col-form-label" })
                                     <div class="col-md-14">
@@ -81,7 +83,7 @@
                             <div class="email action-send">
                                 <div class="col-md-12 ">
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-space" type="submit"><i class="icon s7-mail"></i> Save</button>
+                                        <input type="submit" value="Save" class="btn btn-primary" class="icon s7-mail" />
                                         <button class="btn btn-secondary btn-space" type="button"><i class="icon s7-close"></i> Reset</button>
                                     </div>
                                 </div>
@@ -93,16 +95,13 @@
                                 <img class="img-fluid" src="~/img/home/hero-slide1.png" />
                                 <div class="input-group">
                                     <div class="custom-file mb-3">
-                                        <label class="col-form-label">Img</label>
-                                        <div class=" row col-md-14">
-                                            @Html.EditorFor(model => model.IMG, new { htmlAttributes = new { @class = "custom-file-input form-control",type="text" } })
+
+                                        @Html.LabelFor(model => model.IMG, "Choose files", htmlAttributes: new { @class = "custom-file-label", @for = "customFile" })
+                                        <div class="col-md-14">
+                                            @Html.EditorFor(model => model.IMG, new { htmlAttributes = new { @class = "custom-file-input form-control", type = "file" } })
                                             @Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                        <div class="col-md-4">
-
-                                            <a href="#" class="btn btn-success btn-space" onclick="BrowseServer()" >New Img</a>
-                                        </div>
                                 </div>
                             </form>
                         </div>
@@ -115,16 +114,12 @@
 
 @section ScriptJS {
     <script>
-        CKEDITOR.replace('inputND')
-            function BrowseServer() {
-            var finder = new CKFinder();
-                finder.selectActioFunction = linkImg;
-            finder.popup();    
-        }
-        function linkImg(url) {
-            $("input[name=HinhAnh]").val(url);
-        }
+        CKEDITOR.replace('inputND', {
+
+            fullPage: false,
+            allowedContent: true
+        })
     </script>
-    }
+}
 
 

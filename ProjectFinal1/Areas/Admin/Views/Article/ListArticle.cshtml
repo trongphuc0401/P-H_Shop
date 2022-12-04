@@ -1,69 +1,124 @@
 ﻿@model IEnumerable<ProjectFinal1.Models.ARTICLE>
-
+@using ProjectFinal1.Models;
 @{
     ViewBag.Title = "ListArticle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int stt = 0;
+    List<ARTICLE> list = (List<ARTICLE>)ViewData["ListArticle"];
 }
 
-<h2>ListArticle</h2>
+<style>
+    form {
+        display: inline;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("Add Article", "Index", "AddArticle")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            STT
-        </th>
-        <th>
-            Tên bài viết
-        </th>
-        <th>
-            Ngày viết
-        </th>
-        <th>
-            Người viết
-        </th>
-        <th>
-            Đã duyệt
-        </th>
-        <th>
-            Loại
-        </th>
-       
+<div class="row">
+    <!-- ============================================================== -->
+    <!-- data table  -->
+    <!-- ============================================================== -->
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">List Article</h2>
+                <p></p>
+            </div>
+            <div class="row">
+                <div class=" offset-md-9">
+                    <a class="btn btn-secondary btn-space" href="@Url.Action("AddArticle","Article")">New Post</a>
+                    <button class="btn btn-primary btn-space" href="@Url.Action("ListArticle","Article")">List Hide Aritcle</button>
+                </div>
+               
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="" class="table table-striped table-bordered second" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    N.o
+                                </th>
+                                <th>
+                                    ID Article
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Author
+                                </th>
+                                <th>
+                                    Approved
+                                </th>
 
-        <th>#</th>
-    </tr>
+                                <th>
+                                    Settings
+                                </th>
+                            </tr>
+                        </thead>
+                        @{
+                            foreach (ARTICLE i in list)
+                            {
+                                stt++;
+                                <tr>
+                                    <td>@stt</td>
+                                    <td>
+                                        @i.ID_AR
+                                    </td>
+                                    <td>
+                                        @i.NAME_AR
+                                    </td>
+                                    <td>
+                                        @string.Format("{0:hh:mm:ss [dd MMMM yyyy]}", i.DATE_SUB)
+                                    </td>
+                                    <td>
+                                        @i.ACCOUNT1.NAME_ACCOUNT
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" @Html.Raw(i.DADUYET == true ? "checked" : "") />
+                                    </td>
 
-@foreach (var item in Model) 
-{
-    stt++;
-    <tr>
-        <td>@stt</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME_AR)
-        </td>
-        <td>
-            @string.Format("{0:dd-MM-yyyy}",item.DATE_SUB) 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ACCOUNT1.PASS)
-        </td>
-        <td>
-            <input type="checkbox" @Html.Raw(item.DADUYET==true?"checked":"")/>
-            @Html.DisplayFor(modelItem => item.DADUYET)
-        </td>
-        <td>
+                                    <td>
+                                        <style>
+                                            a {
+                                                color: #fff;
+                                            }
+                                        </style>
 
-            @Html.DisplayFor(modelItem => item.LOAITIN)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_AR }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_AR }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_AR })
-        </td>
-    </tr>
+                                        @using (Html.BeginForm("BanArticle", "Article",FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="ID_AR" value="@i.ID_AR" />
+                                            <button class="btn btn-success btn-space" title="Cho phép hiển thị bài viết trên các trang công khai ">Ban</button>
+                                        }
+                                        
+                                            <input type="hidden" name="mabaiviet" value="@i.ID_AR" />
+                                            <button class="btn btn-brand btn-space" title="Cho phép hiển chỉnh sữa bài viết ">@Html.ActionLink("Edit", "Edit", new { id = i.ID_AR })</button>
+                                        
+                                        @using (Html.BeginForm("DeleteArticle", "Article", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="mabaiviet" value="@i.ID_AR" />
+                                            <button class="btn btn-danger btn-space" title="Cho phép xóa bài viết ">Delete </button>
+                                        }
+
+
+
+
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptJS {
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 }
-
-</table>

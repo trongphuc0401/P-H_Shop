@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Category";
     ViewBag.active = 2;
-
+    PRODUCT pr = ViewData["PRODUCTbyLoaiSP"] as PRODUCT;
 }
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
@@ -37,7 +37,7 @@
                                         foreach (LOAISP x in Global.GetLOAISPs())
                                         {
                                             <li class="filter-list">
-                                                <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_L" )>
+                                                <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_L" href="@Url.Action("Index","Category", new {ID_L=x.ID_L})" )>
                                                     <input class="pixel-radio" type="radio" id="@x.ID_L" name="@x.ID_L">
                                                     <label for="@x.ID_L">@x.NAME_L</label>
                                                 </a>
@@ -63,7 +63,7 @@
                                             foreach (BRAND x in Global.GetBRANDs())
                                             {
                                                 <li class="filter-list">
-                                                    <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_L" )>
+                                                    <a class="nav-link" @(a++ == 0 ? "active" : "") id="@x.ID_BR" href="@Url.Action("Index","Category", new {ID_BR=x.ID_BR})" )>
                                                         <input class="pixel-radio" type="radio" id="@x.ID_BR" name="@x.ID_BR">
                                                         <label for="@x.NAME_BR">@x.NAME_BR<span></span></label>
                                                     </a>
@@ -98,20 +98,7 @@
                             </ul>
                         </form>
                     </div>
-                    <div class="common-filter">
-                        <div class="head">Price</div>
-                        <div class="price-range-area">
-                            <div id="price-range"></div>
-                            <div class="value-wrapper d-flex">
-                                <div class="price">Price:</div>
-                                <span>$</span>
-                                <div id="lower-value"></div>
-                                <div class="to">to</div>
-                                <span>$</span>
-                                <div id="upper-value"></div>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
             <div class="col-xl-9 col-lg-8 col-md-7">
@@ -145,45 +132,44 @@
                 </div>
                 <!-- End Filter Bar -->
                 <!-- Start Best Seller -->
+                        <section class="lattest-product-area pb-40 category-list>
 
                 @{
                     int m = 0;
-                    foreach (LOAISP y in Global.GetLOAISPs().Take(1))
+                    foreach (LOAISP y in Global.GetLOAISPs() )
                     {
-                        <section class="lattest-product-area pb-40 category-list @(m++==0?"active":"")" id="@y.ID_L">
-                            <div class="row">
+                            <div class="row  " id="@y.ID_L">
 
                                 @{
                                     int n = 0;
-                                    foreach (PRODUCT x in Global.GetPRODUCTByLOAISP(y.ID_L))
+                                    foreach ( PRODUCT x in Global.GetPRODUCTByLOAISP(y.ID_L))
                                     {
-                                        <div class="col-md-6 col-lg-4">
+                                        <div class="col-md-6 col-lg-4" id="@y.ID_L">
                                             <div class="card text-center card-product">
                                                 <div class="card-product__img">
                                                     <img class="card-img" src="@x.IMG" alt="">
                                                     <ul class="card-product__imgOverlay">
-                                                        <li><button><i class="ti-search"></i></button></li>
-                                                        <li><button><i class="ti-shopping-cart"></i></button></li>
-                                                        <li><button><i class="ti-heart"></i></button></li>
+                                                        @using (Html.BeginForm("addToCart", "Home", FormMethod.Post))
+                                                        {
+                                                            <li><input type="hidden" value="@x.ID_PR" /><button><i class="ti-shopping-cart"></i></button></li>
+                                                        }
+                                                        <h4>Add to cart</h4>
                                                     </ul>
                                                 </div>
                                                 <div class="card-body">
 
-                                                    <h4 class="card-product__title"><a href="#">@x.NAME_PR</a></h4>
+                                                    <h4 class="card-product__title"><a href="@Url.Action("Index","Single_product", new { masp = x.ID_PR })">@x.NAME_PR</a></h4>
                                                     <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        if (n++ >= 14)
-                                        {
-                                            break;
-                                        }
+                                       
                                     }
                             }
                             </div>
-                        </section>
                     }
                 }
+                        </section>
                 <!-- End Best Seller -->
             </div>
         </div>

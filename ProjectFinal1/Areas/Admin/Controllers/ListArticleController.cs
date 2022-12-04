@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace ProjectFinal1.Areas.Admin.Controllers
 {
-    public class AddArticleController : Controller
+    public class ListArticleController : Controller
     {
-        // GET: Admin/AddArticle
+        // GET: Admin/ListArticle
         public ActionResult Index()
         {
             return View();

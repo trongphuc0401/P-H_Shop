@@ -1,6 +1,8 @@
-﻿@{
-    ViewBag.Title="Single-product";
+﻿@using ProjectFinal1.Models;
+@{
+    ViewBag.Title = "Single-product";
     ViewBag.active = 2;
+    PRODUCT x = ViewData["PRODUCT"] as PRODUCT;
 }
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="blog">
@@ -23,52 +25,53 @@
 <div class="product_image_area">
     <div class="container">
         <div class="row s_product_inner">
-            <div class="col-lg-6">
-                <div class="owl-carousel owl-theme s_Product_carousel">
-                    <div class="single-prd-item">
-                        <img class="img-fluid" src="~/img/category/s-p1.jpg" alt="">
-                    </div>
-                    <!-- <div class="single-prd-item">
+          
+                    <div class="col-lg-6">
+                        <div class="owl-carousel owl-theme s_Product_carousel">
+                            <div class="single-prd-item">
+                                <img class="img-fluid" src="@x.IMG" alt="">
+                            </div>
+                            <!-- <div class="single-prd-item">
                         <img class="img-fluid" src="~/img/category/s-p1.jpg" alt="">
                     </div>
                     <div class="single-prd-item">
                         <img class="img-fluid" src="~/img/category/s-p1.jpg" alt="">
                     </div> -->
-                </div>
-            </div>
-            <div class="col-lg-5 offset-lg-1">
-                <div class="s_product_text">
-                    <h3>Faded SkyBlu Denim Jeans</h3>
-                    <h2>$149.99</h2>
-                    <ul class="list">
-                        <li><a class="active" href="#"><span>Category</span> : Household</a></li>
-                        <li><a href="#"><span>Availibility</span> : In Stock</a></li>
-                    </ul>
-                    <p>
-                        Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
-                        something that can make your interior look awesome, and at the same time give you the pleasant warm feeling
-                        during the winter.
-                    </p>
-                    <div class="product_count">
-                        <label for="qty">Quantity:</label>
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                class="increase items-count" type="button">
-                            <i class="ti-angle-left"></i>
-                        </button>
-                        <input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                class="reduced items-count" type="button">
-                            <i class="ti-angle-right"></i>
-                        </button>
-                        <a class="button primary-btn" href="#">Add to Cart</a>
+                        </div>
                     </div>
-                    <div class="card_area d-flex align-items-center">
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                    <div class="col-lg-5 offset-lg-1">
+
+                        <div class="s_product_text">
+                            <h3>@x.NAME_PR</h3>
+                            <h2>@string.Format("{0:#,0}", @x.PRICE) VND</h2>
+                            <ul class="list">
+                                <li><a class="active" href="#"><span>Category</span> : Household</a></li>
+                                <li><a href="#"><span>Availibility</span> : In Stock</a></li>
+                            </ul>
+                            <p>
+                                @x.NDTT
+                        </p>
+                        <div class="product_count  ">
+                            <label for="qty">Quantity:</label>
+                            <button style="top: 0px;left: 21rem;"onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    class="increase items-count" type="button">
+                                <i class="ti-angle-right"></i>
+                            </button>
+                            <input type="text" name="qty" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                            <button style="top: 19px;left: 21rem;" onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    class="reduced items-count" type="button">
+                                <i class="ti-angle-left"></i>
+                            </button>
+                            <a class="button primary-btn" href="#">Add to Cart</a>
+                        </div>
+                        <div class="card_area d-flex align-items-center">
+                            <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
+                            <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+                        </div>
                     </div>
                 </div>
+           
             </div>
-        </div>
     </div>
 </div>
 <!--================End Single Product Area =================-->

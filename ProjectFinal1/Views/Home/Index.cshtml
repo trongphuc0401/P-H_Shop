@@ -34,8 +34,8 @@
                     foreach (LOAISP x in Global.GetLOAISPs())
                     {
                     <div class="hero-carousel__slide">
-                        <img src="~/img/home/hero-slide1.png" alt="" class="img-fluid">
-                        <a href="#" class="hero-carousel__slideOverlay">
+                        <img src="@x.IMG" alt="" style="height:350px;width:350px" class="img-fluid">
+                        <a href="@Url.Action("Index","Category", new {ID_L=x.ID_L})")" class="hero-carousel__slideOverlay">
                             <h3>@x.NAME_L</h3>
                         </a>
                     </div>
@@ -66,14 +66,16 @@
                                 <div class="card-product__img">
                                     <img class="card-img" src="@x.IMG" alt="">
                                     <ul class="card-product__imgOverlay">
-                                        <li><button><i class="ti-search"></i></button></li>
-                                        <li><button><i class="ti-shopping-cart"></i></button></li>
-                                        <li><button><i class="ti-heart"></i></button></li>
+                                        @using (Html.BeginForm("addToCart", "Home", FormMethod.Post,new { masp = x.ID_PR }) )
+                                        {
+                                            <li><input type="hidden" value="@x.ID_PR" /><button><i class="ti-shopping-cart"></i></button></li>
+                                        }
+                                        <h4>Add to cart</h4>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <p>Accessories</p>
-                                    <h4 class="card-product__title"><a href="single-product.html">@x.NAME_PR</a></h4>
+                                    <h4 class="card-product__title"><a href="@Url.Action("Index","Single_product", new { masp = x.ID_PR })">@x.NAME_PR</a></h4>
                                     <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
                                 </div>
                             </div>
@@ -122,14 +124,16 @@
                             <div class="card-product__img">
                                 <img class="img-fluid" src="@x.IMG" alt="">
                                 <ul class="card-product__imgOverlay">
-                                    <li><button><i class="ti-search"></i></button></li>
-                                    <li><button><i class="ti-shopping-cart"></i></button></li>
-                                    <li><button><i class="ti-heart"></i></button></li>
+                                    @using (Html.BeginForm("addToCart", "Home", FormMethod.Post, new { masp = x.ID_PR }))
+                                    {
+                                        <li><input type="hidden" value="@x.ID_PR" /><button><i class="ti-shopping-cart"></i></button></li>
+                                    }
+                                <h4>Add to cart</h4>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <p>Accessories</p>
-                                <h4 class="card-product__title"><a href="single-product.html">@x.NAME_PR</a></h4>
+                                <h4 class="card-product__title"><a href="@Url.Action("Index","Single_product", new { masp = x.ID_PR })">@x.NAME_PR</a></h4>
                                 <p class="card-product__price">@string.Format("{0:#,0}", @x.PRICE) VND</p>
                             </div>
                         </div>
@@ -140,101 +144,7 @@
                     }
                 }
 
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product3.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Decor</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
 
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product4.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Decor</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
-
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product1.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Accessories</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Quartz Belt Watch</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
-
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product2.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Beauty</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Women Freshwash</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
-
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product3.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Decor</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
-
-                <div class="card text-center card-product">
-                    <div class="card-product__img">
-                        <img class="img-fluid" src="~/img/product/product4.png" alt="">
-                        <ul class="card-product__imgOverlay">
-                            <li><button><i class="ti-search"></i></button></li>
-                            <li><button><i class="ti-shopping-cart"></i></button></li>
-                            <li><button><i class="ti-heart"></i></button></li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <p>Decor</p>
-                        <h4 class="card-product__title"><a href="single-product.html">Room Flash Light</a></h4>
-                        <p class="card-product__price">$150.00</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

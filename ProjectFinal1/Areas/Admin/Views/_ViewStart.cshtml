@@ -1,3 +1,11 @@
-﻿@{
+﻿@using ProjectFinal1.Models;
+@{
+    ACCOUNT x = (ACCOUNT)Session["TtDangNhap"];
+    if (x == null)
+    {
+        Response.Redirect("~/Login");
+    }
+
+
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }

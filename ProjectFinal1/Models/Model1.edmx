@@ -78,6 +78,7 @@ warning 6002: The table/view 'MEN_FASHIONS.dbo.INVENTORY' does not have a primar
           </Key>
           <Property Name="ID_L" Type="int" Nullable="false" />
           <Property Name="NAME_L" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IMG" Type="varchar(max)" />
           <Property Name="NOTE" Type="ntext" />
         </EntityType>
         <EntityType Name="ORDER_DETAILS">
@@ -399,6 +400,7 @@ warning 6002: The table/view 'MEN_FASHIONS.dbo.INVENTORY' does not have a primar
           <NavigationProperty Name="PRODUCTS" Relationship="Self.FK__PRODUCTS__ID_L__33D4B598" FromRole="LOAISP" ToRole="PRODUCTS" />
           <NavigationProperty Name="BRANDS" Relationship="MEN_FASHIONSModel.FK__BRANDS__ID_L__32E0915F" FromRole="LOAISP" ToRole="BRAND" />
           <NavigationProperty Name="INVENTORies" Relationship="MEN_FASHIONSModel.FK__INVENTORY__ID_L__4BAC3F29" FromRole="LOAISP" ToRole="INVENTORY" />
+          <Property Name="IMG" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ORDER_DETAILS">
           <Key>
@@ -740,6 +742,7 @@ warning 6002: The table/view 'MEN_FASHIONS.dbo.INVENTORY' does not have a primar
           <EntitySetMapping Name="LOAISPs">
             <EntityTypeMapping TypeName="MEN_FASHIONSModel.LOAISP">
               <MappingFragment StoreEntitySet="LOAISP">
+                <ScalarProperty Name="IMG" ColumnName="IMG" />
                 <ScalarProperty Name="ID_L" ColumnName="ID_L" />
                 <ScalarProperty Name="NAME_L" ColumnName="NAME_L" />
                 <ScalarProperty Name="NOTE" ColumnName="NOTE" />

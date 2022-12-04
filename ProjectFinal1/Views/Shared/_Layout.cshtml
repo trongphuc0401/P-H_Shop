@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ProjectFinal1.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand logo_h" href="index.html"><img src="~/img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="index.html"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
@@ -37,105 +38,26 @@
                             {
                                 <li class="nav-item "><a href="~/Home" class="nav-link">Home</a></li>
                             }
-                            @if (ViewBag.active == 2)
-                            {
+                      
                                 <li class="nav-item submenu dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true"
                                        aria-expanded="false">Shop</a>
                                     <ul class="dropdown-menu active">
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item "><a href="~/Category" class="nav-link">Shop Category</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Category" class="nav-link">Shop Category</a></li>
+                                        @{
+                                            foreach (LOAISP x in Global.GetLOAISPs())
+                                            {
+
+                                                    <li class="nav-item id="@x.ID_L" ">
+                                                    <a href="@Url.Action("Index","Category", new {ID_L=x.ID_L})" class="nav-link">@x.NAME_L</a>
+                                                      
+                                                    </li>
+
+                                            }
                                         }
 
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Single_product" class="nav-link">Product Details</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Single_product" class="nav-link">Product Details</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Checkout" class="nav-link">Product Checkout</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Checkout" class="nav-link">Product Checkout</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Confirmation" class="nav-link">Confirmation</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Confirmation" class="nav-link">Confirmation</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Cart" class="nav-link">Shopping Cart</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Cart" class="nav-link">Shopping Cart</a></li>
-                                        }
                                     </ul>
                                 </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                       aria-expanded="false">Shop</a>
-                                    <ul class="dropdown-menu active">
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Category" class="nav-link">Shop Category</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Category" class="nav-link">Shop Category</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Single_product" class="nav-link">Product Details</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Single_product" class="nav-link">Product Details</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Checkout" class="nav-link">Product Checkout</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Checkout" class="nav-link">Product Checkout</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Confirmation" class="nav-link">Confirmation</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Confirmation" class="nav-link">Confirmation</a></li>
-                                        }
-                                        @if (ViewBag.active == 2)
-                                        {
-                                            <li class="nav-item active"><a href="~/Cart" class="nav-link">Shopping Cart</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item "><a href="~/Cart" class="nav-link">Shopping Cart</a></li>
-                                        }
-                                    </ul>
-                                </li>
-                            }
+                           
                             @if (ViewBag.active == 3)
                             {
                                 <li class="nav-item submenu dropdown active ">
@@ -186,30 +108,16 @@
                                     </ul>
                                 </li>
                             }
-                                <li class="nav-item submenu dropdown  @Html.Raw(ViewBag.active==4 ? "active":"")">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                       aria-expanded="false">Pages</a>
-                                    <ul class="dropdown-menu">
-                                        
-                                            <li class="nav-item @Html.Raw(ViewBag.active==4 ? "active":"")"><a href="~/Login" class="nav-link">Login</a></li>
-                                        
-                                       
-                                            <li class="nav-item @Html.Raw(ViewBag.active==4 ? "active":"")"><a href="~/Register" class="nav-link">Register</a></li>
-                                        
-                                        
-                                            <li class="nav-item @Html.Raw(ViewBag.active==4 ? "active":"")"><a href="~/Tracking_order" class="nav-link">Tracking</a></li>
-                                        
-
-                                    </ul>
-                                </li>
      
                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Contact")">Contact</a></li>
                         </ul>
 
                         <ul class="nav-shop">
                             <li class="nav-item"><button><i class="ti-search"></i></button></li>
-                            <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button> </li>
-                            <li class="nav-item"><a class="button button-header" href="@Url.Action("Index", "")">Buy Now</a></li>
+                            <li class="nav-item"><button><a  href="@Url.Action("Index", "Cart")"><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></a></button> </li>
+                            <li class="nav-item"><a class="button button-header" href="@Url.Action("Index", "Register")">Register</a></li>
+                            <li class="nav-item"><a class="button button-header" href="@Url.Action("Index", "Login")">LOGIN</a></li>
+
                         </ul>
                     </div>
                 </div>

@@ -13,96 +13,123 @@
 {
 
     @Html.AntiForgeryToken()
-    <div class="row m-2">
-        <div class="col-md-12">
-            <div class="content">
-                <div class="section-block" id="basicform">
-                    <h3 class="section-title">Add New Post</h3>
-                </div>
-                <div class="card">
-                    <div class="row">
-                        <div class=" col-md-8">
-                            <form class="m-2">
-                                <div class="form-group m-2">
-                                    @Html.LabelFor(model => model.NAME_AR, "Enter title here", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-12">
-                                        @Html.EditorFor(model => model.NAME_AR, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.NAME_AR, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group m-2">
-                                    @Html.LabelFor(model => model.ND, "Content", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-12">
-                                        @Html.EditorFor(model => model.ND, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.ND, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="row m-1">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(model => model.DATE_SUB, "Date", htmlAttributes: new { @class = "col-form-label" })
-                                    <div class="col-md-14">
-                                        @Html.EditorFor(model => model.DATE_SUB, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-                                        @Html.ValidationMessageFor(model => model.DATE_SUB, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(model => model.ACCOUNT, "Author", htmlAttributes: new { @class = "col-form-label" })
-                                    <div class="col-md-14">
-                                        <select name="ACCOUNT" class="form-control">
-                                            @foreach (var item in new ProjectFinal1.Models.MEN_FASHIONSEntities().ACCOUNTs.ToList())
-                                            {
-                                                <option value="@item.ACCOUNT1">@item.NAME_ACCOUNT</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessageFor(model => model.ACCOUNT, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(model => model.DADUYET,"Approved", htmlAttributes: new { @class = "col-form-label" })
-                                    <div class="col-md-14">
-                                        <div class="checkbox">
-                                            <input type="checkbox" value="true" name="DADUYET"/>
-                                            @Html.ValidationMessageFor(model => model.DADUYET, "", new { @class = "text-danger" })
-                                        
-
-                                        </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="email action-send">
-                                <div class="col-md-12 ">
+    
+        <div class="row m-2">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="section-block" id="basicform">
+                        <h3 class="section-title">Add New Post</h3>
+                    </div>
+                    <div class="card">
+                        <div class="row">
+                            <div class=" col-md-8">
+                                <form class="m-2">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-space" type="submit"><i class="icon s7-mail"></i> Save</button>
-                                        <button class="btn btn-secondary btn-space" type="button"><i class="icon s7-close"></i> Reset</button>
+                                        @Html.LabelFor(model => model.ID_AR, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.ID_AR, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ID_AR, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-md-4">
-                            <form class="m-2">
-                                <h3>Upload Images</h3>
-                                <img class="img-fluid" src="~/img/home/hero-slide1.png" />
-                                <div class="input-group">
-                                    <div class="custom-file mb-3">
-                                        
-                                        @Html.LabelFor(model => model.IMG,"Choose files", htmlAttributes: new { @class = "custom-file-label", @for="customFile" })
+                                    <div class="form-group m-2">
+                                        @Html.LabelFor(model => model.NAME_AR, "Enter title here", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.NAME_AR, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.NAME_AR, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-2">
+                                        @Html.LabelFor(model => model.ND, "Content", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.ND, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ND, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row m-1">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.DATE_SUB, "Date", htmlAttributes: new { @class = "col-form-label" })
                                         <div class="col-md-14">
-                                            @Html.EditorFor(model => model.IMG, new { htmlAttributes = new { @class = "custom-file-input form-control", type = "file" } })
-                                            @Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.DATE_SUB, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.DATE_SUB, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.ACCOUNT, "Author", htmlAttributes: new { @class = "col-form-label" })
+                                        <div class="col-md-14">
+                                            <select name="ACCOUNT" class="form-control">
+                                                @foreach (var item in new ProjectFinal1.Models.MEN_FASHIONSEntities().ACCOUNTs.ToList())
+                                                {
+                                                    <option value="@item.ACCOUNT1">@item.NAME_ACCOUNT</option>
+                                                }
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.ACCOUNT, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.LOAITIN, "Category", htmlAttributes: new { @class = "col-form-label" })
+                                        <div class="col-md-14">
+                                            <select name="ARTICLES" class="form-control">
+                                                @foreach (var item in new ProjectFinal1.Models.MEN_FASHIONSEntities().ARTICLES.ToList())
+                                                {
+                                                    <option value="@item.LOAITIN">@item.LOAITIN</option>
+                                                }
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.LOAITIN, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(model => model.DADUYET, "Approved", htmlAttributes: new { @class = "col-form-label" })
+                                        <div class="col-md-14">
+                                            <div class="checkbox">
+                                                <input type="checkbox" value="true" name="DADUYET" />
+                                                @Html.ValidationMessageFor(model => model.DADUYET, "", new { @class = "text-danger" })
+
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="email action-send">
+                                    <div class="col-md-12 ">
+                                        <div class="form-group">
+                                            <button value="Create" class="btn btn-primary btn-space" type="submit"><i class="icon s7-mail"></i> Save</button>
+                                            <button class="btn btn-secondary btn-space" type="button"><i class="icon s7-close"></i> Reset</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Create" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-md-4">
+                                <form class="m-2">
+                                    <h3>Upload Images</h3>
+                                    <img class="img-fluid" src="~/img/home/hero-slide1.png" />
+                                    <div class="input-group">
+                                        <div class="custom-file mb-3">
+
+                                            @Html.LabelFor(model => model.IMG, "Choose files", htmlAttributes: new { @class = "custom-file-label", @for = "customFile" })
+                                            <div class="col-md-14">
+                                                @Html.EditorFor(model => model.IMG, new { htmlAttributes = new { @class = "custom-file-input form-control", type = "file" } })
+                                                @Html.ValidationMessageFor(model => model.IMG, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-   
-}
-    <!-- ============================================================== -->
-    <!-- end basic form  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
+        
+
+        }
+        <!-- ============================================================== -->
+        <!-- end basic form  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
